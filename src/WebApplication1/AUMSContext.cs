@@ -1,4 +1,6 @@
-﻿using System;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -6,6 +8,14 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WebApplication1
 {
+    public partial class AUMSContext : IIpInfosDbContext
+    {
+        public Task<int> CommitAsync(CancellationToken cancellationToken)
+        {
+            return base.SaveChangesAsync(cancellationToken);
+        }
+    }
+
     public partial class AUMSContext : DbContext
     {
         public AUMSContext()
@@ -19,6 +29,8 @@ namespace WebApplication1
 
         public virtual DbSet<IpInfo> IpInfos { get; set; }
         public virtual DbSet<UserInfo> UserInfos { get; set; }
+
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

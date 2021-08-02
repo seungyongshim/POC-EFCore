@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,11 +11,11 @@ namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserInfoesController : ControllerBase
+    public class UserInfosController : ControllerBase
     {
         private readonly AUMSContext _context;
 
-        public UserInfoesController(AUMSContext context)
+        public UserInfosController(AUMSContext context)
         {
             _context = context;
         }

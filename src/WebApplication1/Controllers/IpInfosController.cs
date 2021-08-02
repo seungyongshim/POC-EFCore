@@ -22,9 +22,9 @@ namespace WebApplication1.Controllers
 
         // GET: api/IpInfoes
         [HttpGet]
-        public async Task<ActionResult<IpInfo[]>> GetIpInfos()
+        public async Task<ActionResult<IEnumerable<IpInfo>>> GetIpInfos()
         {
-            return await _context.IpInfos.ToArrayAsync();
+            return await _context.IpInfos.ToListAsync();
         }
 
         // GET: api/IpInfoes/5

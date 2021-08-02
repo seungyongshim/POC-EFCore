@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,17 +30,17 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AUMSContext>(options => options
-                                  .UseLazyLoadingProxies()
-                                  //.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-                                  .UseSqlServer(Configuration.GetConnectionString("MSSQL")));
+            services.AddDbContext<AUMSContext>(options =>
+                options.UseLazyLoadingProxies()
+                       .UseSqlServer(Configuration.GetConnectionString("SqlServer")));
 
             services.AddControllers()
-                    .AddJsonOptions(option =>
+                    .AddNewtonsoftJson(option =>
                     {
-                        option.JsonSerializerOptions.ReferenceHandler = //ReferenceHandler.Preserve;
-                        new ReferenceHandler<CustomReferenceResolver>();
+                        //option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                        option.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
                     });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });
