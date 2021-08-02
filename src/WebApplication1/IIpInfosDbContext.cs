@@ -10,5 +10,15 @@ namespace WebApplication1
     {
         DbSet<IpInfo> IpInfos { get; set; }
 
+        Task<int> CommitAsync(CancellationToken cancellationToken = default);
+        
+    }
+
+    public interface IUserInfosDbContext
+    {
+        DbSet<UserInfo> UserInfos { get; set; }
+
+        Task<int> CommitAsync(CancellationToken cancellationToken = default);
+
     }
 }

@@ -1,37 +1,32 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1;
 
 namespace WebApplication1.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class IpInfosController : ControllerBase
     {
-        private readonly AUMSContext _context;
+        private readonly IIpInfosDbContext Context { get; }
 
-        public IpInfosController(AUMSContext context)
+        public IpInfosController(IIpInfosDbContext context)
         {
-            _context = context;
+            Context = context;
         }
 
-        // GET: api/IpInfoes
         [HttpGet]
         public async Task<ActionResult<IEnumerable<IpInfo>>> GetIpInfos()
         {
-            return await _context.IpInfos.ToListAsync();
+            return await Context.IpInfos.ToListAsync();
         }
 
-        // GET: api/IpInfoes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<IpInfo>> GetIpInfo(int id)
         {
-            var ipInfo = await _context.IpInfos.FindAsync(id);
+            var ipInfo = await Context.IpInfos.FindAsync(id);
 
             if (ipInfo == null)
             {
@@ -51,11 +46,13 @@ namespace WebApplication1.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(ipInfo).State = EntityState.Modified;
+            Context.IpInfos.Update(ipInfo);
+
+            //_context.Entry(ipInfo).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.CommitAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -77,8 +74,8 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<ActionResult<IpInfo>> PostIpInfo(IpInfo ipInfo)
         {
-            _context.IpInfos.Add(ipInfo);
-            await _context.SaveChangesAsync();
+            Context.IpInfos.Add(ipInfo);
+            await Context.CommitAsync();
 
             return CreatedAtAction("GetIpInfo", new { id = ipInfo.IpInfoId }, ipInfo);
         }
@@ -87,21 +84,21 @@ namespace WebApplication1.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIpInfo(int id)
         {
-            var ipInfo = await _context.IpInfos.FindAsync(id);
+            var ipInfo = await Context.IpInfos.FindAsync(id);
             if (ipInfo == null)
             {
                 return NotFound();
             }
 
-            _context.IpInfos.Remove(ipInfo);
-            await _context.SaveChangesAsync();
+            Context.IpInfos.Remove(ipInfo);
+            await Context.CommitAsync();
 
             return NoContent();
         }
 
         private bool IpInfoExists(int id)
         {
-            return _context.IpInfos.Any(e => e.IpInfoId == id);
+            return Context.IpInfos.Any(e => e.IpInfoId == id);
         }
     }
 }

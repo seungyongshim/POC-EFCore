@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WebApplication1
 {
-    public partial class AUMSContext : IIpInfosDbContext
+    public partial class AUMSContext : IIpInfosDbContext, IUserInfosDbContext
     {
         public Task<int> CommitAsync(CancellationToken cancellationToken)
         {
