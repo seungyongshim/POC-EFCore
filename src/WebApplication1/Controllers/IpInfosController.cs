@@ -54,7 +54,7 @@ namespace WebApplication1.Controllers
 
             try
             {
-                await Context.CommitAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -77,7 +77,7 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult<IpInfo>> PostIpInfo(IpInfo ipInfo)
         {
             Context.IpInfos.Add(ipInfo);
-            await Context.CommitAsync();
+            await Context.SaveChangesAsync();
 
             return CreatedAtAction("GetIpInfo", new { id = ipInfo.IpInfoId }, ipInfo);
         }
@@ -93,7 +93,7 @@ namespace WebApplication1.Controllers
             }
 
             Context.IpInfos.Remove(ipInfo);
-            await Context.CommitAsync();
+            await Context.SaveChangesAsync();
 
             return NoContent();
         }

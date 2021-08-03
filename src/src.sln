@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{B692E1E8-AB13-4C7A-B6AB-2ADFB4356139}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{A8D3223A-FFDB-45EF-9778-E6C8B7430071}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfCore", "EfCore\EfCore.csproj", "{76B61813-73AE-49E3-8FD6-B07367FC58A0}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{B692E1E8-AB13-4C7A-B6AB-2ADFB4356139}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B692E1E8-AB13-4C7A-B6AB-2ADFB4356139}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B692E1E8-AB13-4C7A-B6AB-2ADFB4356139}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A8D3223A-FFDB-45EF-9778-E6C8B7430071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8D3223A-FFDB-45EF-9778-E6C8B7430071}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8D3223A-FFDB-45EF-9778-E6C8B7430071}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8D3223A-FFDB-45EF-9778-E6C8B7430071}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76B61813-73AE-49E3-8FD6-B07367FC58A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76B61813-73AE-49E3-8FD6-B07367FC58A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76B61813-73AE-49E3-8FD6-B07367FC58A0}.Release|Any CPU.ActiveCfg = Release|Any CPU

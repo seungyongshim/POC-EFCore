@@ -9,6 +9,6 @@ namespace EfCore
     {
         DbSet<IpInfo> IpInfos { get; }
 
-        Task<int> CommitAsync(CancellationToken cancellationToken = default);
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

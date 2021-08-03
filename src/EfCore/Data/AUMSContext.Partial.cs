@@ -2,10 +2,11 @@ namespace EfCore.Data
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
 
-    public partial class AUMSContext : IIpInfosDbContext, IUserInfosDbContext
+    public partial class AUMSContext : DbContext, IIpInfosDbContext, IUserInfosDbContext
     {
-        public Task<int> CommitAsync(CancellationToken cancellationToken) =>
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
             base.SaveChangesAsync(cancellationToken);
     }
 }
