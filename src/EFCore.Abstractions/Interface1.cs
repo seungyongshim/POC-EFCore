@@ -1,17 +1,16 @@
 using System.Threading;
 using System.Threading.Tasks;
+using EfCore.Models;
 using Microsoft.EntityFrameworkCore;
 
-#nullable disable
-
-namespace WebApplication1
+namespace EfCore.Abstractions
 {
-    public interface IIpInfosDbContext 
+   
+    public interface IIpInfosDbContext
     {
         DbSet<IpInfo> IpInfos { get; set; }
 
         Task<int> CommitAsync(CancellationToken cancellationToken = default);
-        
     }
 
     public interface IUserInfosDbContext
@@ -19,6 +18,5 @@ namespace WebApplication1
         DbSet<UserInfo> UserInfos { get; set; }
 
         Task<int> CommitAsync(CancellationToken cancellationToken = default);
-
     }
 }

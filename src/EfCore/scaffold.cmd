@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold "Server=(Local);Database=AUMS;User Id=MT;Password=q1w2e3r4t5Y^U&I*O(P);Connection Timeout=3" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models --force

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EfCore;
+using EfCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +12,7 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class IpInfosController : ControllerBase
     {
-        private readonly IIpInfosDbContext Context { get; }
+        private IIpInfosDbContext Context { get; }
 
         public IpInfosController(IIpInfosDbContext context)
         {

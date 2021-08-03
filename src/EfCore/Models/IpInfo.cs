@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace WebApplication1
+namespace EfCore.Models
 {
     public partial class IpInfo
     {

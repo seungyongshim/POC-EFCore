@@ -1,21 +1,12 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using EfCore.Models;
 
 #nullable disable
 
-namespace WebApplication1
+namespace EfCore.Data
 {
-    public partial class AUMSContext : IIpInfosDbContext, IUserInfosDbContext
-    {
-        public Task<int> CommitAsync(CancellationToken cancellationToken)
-        {
-            return base.SaveChangesAsync(cancellationToken);
-        }
-    }
-
     public partial class AUMSContext : DbContext
     {
         public AUMSContext()
@@ -29,8 +20,6 @@ namespace WebApplication1
 
         public virtual DbSet<IpInfo> IpInfos { get; set; }
         public virtual DbSet<UserInfo> UserInfos { get; set; }
-
-        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

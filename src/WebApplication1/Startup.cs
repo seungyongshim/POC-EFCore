@@ -1,3 +1,5 @@
+using EfCore;
+using EfCore.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,10 +32,7 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IIpInfosDbContext, AUMSContext>();
-            services.AddDbContext<AUMSContext>(options =>
-                options.UseLazyLoadingProxies()
-                       .UseSqlServer(Configuration.GetConnectionString("SqlServer")));
+            services.AddEfCore(Configuration.GetConnectionString("SqlServer"));
 
             services.AddControllers()
                     .AddNewtonsoftJson(option =>
