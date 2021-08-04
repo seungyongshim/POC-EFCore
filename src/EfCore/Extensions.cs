@@ -8,8 +8,6 @@ namespace EfCore
     {
         public static IServiceCollection AddEfCore(this IServiceCollection services, string connectionString)
         {
-            services.AddScoped<IIpInfosDbContext, AUMSContext>();
-            services.AddScoped<IUserInfosDbContext, AUMSContext>();
             services.AddDbContext<AUMSContext>(options =>
                 options
                        //.UseLazyLoadingProxies()

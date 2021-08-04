@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using EfCore.Models;
@@ -13,11 +13,6 @@ namespace EfCore.Data
         {
         }
 
-        public AUMSContext(DbContextOptions<AUMSContext> options)
-            : base(options)
-        {
-        }
-
         public virtual DbSet<IpInfo> IpInfos { get; set; }
         public virtual DbSet<UserInfo> UserInfos { get; set; }
 
@@ -26,7 +21,7 @@ namespace EfCore.Data
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=(Local);Database=AUMS;User Id=MT;Password=q1w2e3r4t5Y^U&I*O(P);Connection Timeout=3");
+                optionsBuilder.UseSqlServer("Server=(Local);Database=AUMS;User Id=sa;Password=q1w2e3r4t5Y^U&I*O(P);Connection Timeout=3;");
             }
         }
 
