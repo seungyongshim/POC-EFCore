@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EfCore.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreate0 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,8 +13,8 @@ namespace EfCore.Migrations
                 {
                     UserInfoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmpNo = table.Column<string>(type: "char(5)", unicode: false, fixedLength: true, maxLength: 5, nullable: true),
-                    CmpCode = table.Column<string>(type: "char(2)", unicode: false, fixedLength: true, maxLength: 2, nullable: true)
+                    EmpNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CmpCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,17 +27,17 @@ namespace EfCore.Migrations
                 {
                     IpInfoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IpAddress = table.Column<string>(type: "varchar(16)", unicode: false, maxLength: 16, nullable: true),
-                    GrantSend = table.Column<short>(type: "smallint", nullable: true),
-                    UserInfoId = table.Column<int>(type: "int", nullable: true),
-                    PermissionYN = table.Column<bool>(type: "bit", nullable: true),
-                    UseYN = table.Column<bool>(type: "bit", nullable: true)
+                    IpAddress = table.Column<byte[]>(type: "varbinary(16)", maxLength: 16, nullable: true),
+                    PermissionSendingType = table.Column<short>(type: "smallint", nullable: false),
+                    PermissionYn = table.Column<bool>(type: "bit", nullable: true),
+                    UseYn = table.Column<bool>(type: "bit", nullable: true),
+                    UserInfoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_IpInfos", x => x.IpInfoId);
                     table.ForeignKey(
-                        name: "FK_IpInfos_UserInfoId_UserInfos_UserInfoId",
+                        name: "FK_IpInfos_UserInfos_UserInfoId",
                         column: x => x.UserInfoId,
                         principalTable: "UserInfos",
                         principalColumn: "UserInfoId",
@@ -44,7 +45,7 @@ namespace EfCore.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_IpInfo_1",
+                name: "IX_IpInfos_IpAddress",
                 table: "IpInfos",
                 column: "IpAddress");
 
@@ -52,25 +53,6 @@ namespace EfCore.Migrations
                 name: "IX_IpInfos_UserInfoId",
                 table: "IpInfos",
                 column: "UserInfoId");
-
-            migrationBuilder.CreateIndex(
-                name: "UQ_IpInfo_1",
-                table: "IpInfos",
-                column: "IpAddress",
-                unique: true,
-                filter: "[IpAddress] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserInfo_1",
-                table: "UserInfos",
-                columns: new[] { "EmpNo", "CmpCode" });
-
-            migrationBuilder.CreateIndex(
-                name: "UQ_UserInfo_1",
-                table: "UserInfos",
-                columns: new[] { "EmpNo", "CmpCode" },
-                unique: true,
-                filter: "[EmpNo] IS NOT NULL AND [CmpCode] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -9,15 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EfCore.Migrations
 {
-    [DbContext(typeof(AUMSContext))]
-    [Migration("20210804013651_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(AumsContext))]
+    [Migration("20210804022711_InitialCreate0")]
+    partial class InitialCreate0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -29,34 +28,27 @@ namespace EfCore.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<short?>("GrantSend")
+                    b.Property<byte[]>("IpAddress")
+                        .HasMaxLength(16)
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<short>("PermissionSendingType")
                         .HasColumnType("smallint");
 
-                    b.Property<string>("IpAddress")
-                        .HasMaxLength(16)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(16)");
-
                     b.Property<bool?>("PermissionYn")
-                        .HasColumnType("bit")
-                        .HasColumnName("PermissionYN");
+                        .HasColumnType("bit");
 
                     b.Property<bool?>("UseYn")
-                        .HasColumnType("bit")
-                        .HasColumnName("UseYN");
+                        .HasColumnType("bit");
 
                     b.Property<int?>("UserInfoId")
                         .HasColumnType("int");
 
                     b.HasKey("IpInfoId");
 
+                    b.HasIndex("IpAddress");
+
                     b.HasIndex("UserInfoId");
-
-                    b.HasIndex(new[] { "IpAddress" }, "IX_IpInfo_1");
-
-                    b.HasIndex(new[] { "IpAddress" }, "UQ_IpInfo_1")
-                        .IsUnique()
-                        .HasFilter("[IpAddress] IS NOT NULL");
 
                     b.ToTable("IpInfos");
                 });
@@ -69,24 +61,12 @@ namespace EfCore.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CmpCode")
-                        .HasMaxLength(2)
-                        .IsUnicode(false)
-                        .HasColumnType("char(2)")
-                        .IsFixedLength(true);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmpNo")
-                        .HasMaxLength(5)
-                        .IsUnicode(false)
-                        .HasColumnType("char(5)")
-                        .IsFixedLength(true);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserInfoId");
-
-                    b.HasIndex(new[] { "EmpNo", "CmpCode" }, "IX_UserInfo_1");
-
-                    b.HasIndex(new[] { "EmpNo", "CmpCode" }, "UQ_UserInfo_1")
-                        .IsUnique()
-                        .HasFilter("[EmpNo] IS NOT NULL AND [CmpCode] IS NOT NULL");
 
                     b.ToTable("UserInfos");
                 });
@@ -95,8 +75,7 @@ namespace EfCore.Migrations
                 {
                     b.HasOne("EfCore.Models.UserInfo", "UserInfo")
                         .WithMany("IpInfos")
-                        .HasForeignKey("UserInfoId")
-                        .HasConstraintName("FK_IpInfos_UserInfoId_UserInfos_UserInfoId");
+                        .HasForeignKey("UserInfoId");
 
                     b.Navigation("UserInfo");
                 });

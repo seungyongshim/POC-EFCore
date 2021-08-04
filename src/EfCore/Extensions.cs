@@ -8,7 +8,7 @@ namespace EfCore
     {
         public static IServiceCollection AddEfCore(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<AUMSContext>(options =>
+            services.AddDbContext<AumsContext>(options =>
                 options
                        //.UseLazyLoadingProxies()
                        .UseSqlServer(connectionString));

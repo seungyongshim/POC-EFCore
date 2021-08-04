@@ -16,9 +16,9 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class UserInfosController : ControllerBase
     {
-        private readonly AUMSContext _context;
+        private readonly AumsContext _context;
 
-        public UserInfosController(AUMSContext context)
+        public UserInfosController(AumsContext context)
         {
             _context = context;
         }

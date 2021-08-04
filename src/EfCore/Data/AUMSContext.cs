@@ -7,9 +7,9 @@ using EfCore.Models;
 
 namespace EfCore.Data
 {
-    public partial class AUMSContext : DbContext
+    public partial class AumsContext : DbContext
     {
-        public AUMSContext()
+        public AumsContext()
         {
         }
 
@@ -27,45 +27,34 @@ namespace EfCore.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<IpInfo>(entity =>
             {
-                entity.HasIndex(e => e.IpAddress, "IX_IpInfo_1");
+                //entity.Property(e => e.IpAddress)
+                //    .HasMaxLength(16)
+                //    .IsUnicode(false);
 
-                entity.HasIndex(e => e.IpAddress, "UQ_IpInfo_1")
-                    .IsUnique();
-
-                entity.Property(e => e.IpAddress)
-                    .HasMaxLength(16)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PermissionYn).HasColumnName("PermissionYN");
-
-                entity.Property(e => e.UseYn).HasColumnName("UseYN");
-
-                entity.HasOne(d => d.UserInfo)
-                    .WithMany(p => p.IpInfos)
-                    .HasForeignKey(d => d.UserInfoId)
-                    .HasConstraintName("FK_IpInfos_UserInfoId_UserInfos_UserInfoId");
+                //entity.HasOne(d => d.UserInfo)
+                //    .WithMany(p => p.IpInfos)
+                //    .HasForeignKey(d => d.UserInfoId)
+                //    .HasConstraintName("FK_IpInfos_UserInfoId_UserInfos_UserInfoId");
             });
 
             modelBuilder.Entity<UserInfo>(entity =>
             {
-                entity.HasIndex(e => new { e.EmpNo, e.CmpCode }, "IX_UserInfo_1");
+                //entity.HasIndex(e => new { e.EmpNo, e.CmpCode }, "IX_UserInfo_1");
 
-                entity.HasIndex(e => new { e.EmpNo, e.CmpCode }, "UQ_UserInfo_1")
-                    .IsUnique();
+                //entity.HasIndex(e => new { e.EmpNo, e.CmpCode }, "UQ_UserInfo_1")
+                //    .IsUnique();
 
-                entity.Property(e => e.CmpCode)
-                    .HasMaxLength(2)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
+                //entity.Property(e => e.CmpCode)
+                //    .HasMaxLength(2)
+                //    .IsUnicode(false)
+                //    .IsFixedLength(true);
 
-                entity.Property(e => e.EmpNo)
-                    .HasMaxLength(5)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
+                //entity.Property(e => e.EmpNo)
+                //    .HasMaxLength(5)
+                //    .IsUnicode(false)
+                //    .IsFixedLength(true);
             });
 
             OnModelCreatingPartial(modelBuilder);
