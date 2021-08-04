@@ -46,12 +46,9 @@ namespace EfCore.Data
                 //entity.HasIndex(e => new { e.EmpNo, e.CmpCode }, "UQ_UserInfo_1")
                 //    .IsUnique();
 
-                //entity.Property(e => e.CmpCode)
-                //    .HasMaxLength(2)
-                //    .IsUnicode(false)
-                //    .IsFixedLength(true);
+                entity.Property(e => e.CmpCode).IsFixedLength(true);
+                entity.Property(e => e.EmpNo).IsFixedLength(true);
 
-                //entity.Property(e => e.EmpNo)
                 //    .HasMaxLength(5)
                 //    .IsUnicode(false)
                 //    .IsFixedLength(true);
